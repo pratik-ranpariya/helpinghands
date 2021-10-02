@@ -1,0 +1,71 @@
+<!-- Header Container
+================================================== -->
+<header id="header-container" class="fullwidth dashboard-header not-sticky">
+<style>
+					.non-display{
+						display: none;
+						visibility: hidden;
+					}
+
+					@media (max-width: 1000px) {
+						.non-display{
+							display: block;
+							visibility: visible;
+						}
+					}
+				</style>
+	<!-- Header -->
+	<div id="header">
+		<div class="container">
+			
+			<!-- Left Side Content -->
+			<div class="left-side">
+				
+				<!-- Logo -->
+				<div id="logo">
+				</div>
+
+				<!-- Main Navigation -->
+				<nav id="navigation" class="non-display">
+					<ul id="responsive">
+                                               
+                                                <li><a href="/userlist/1"><i class="icon-feather-users"></i> &nbsp;&nbsp;&nbsp;User List </a></li>
+					
+                                            	<li><a href="<%=BaseUrl%>/dashboard"><i class="icon-material-outline-dashboard"></i> &nbsp;&nbsp;&nbsp;dashboard</a></li> 
+
+						<li><a href="/addpin"><i class="icon-feather-users"></i> &nbsp;&nbsp;&nbsp;Add Pin  </a></li>
+
+						<li><a href="<%=BaseUrl%>/ph_link/1"><i class="icon-feather-image"></i> &nbsp;&nbsp;&nbsp;Add Provider Link</a></li>
+
+						<li><a href="<%=BaseUrl%>/rh_link/1"><i class="icon-material-outline-loyalty"></i> &nbsp;&nbsp;&nbsp;Add Receiver Link</a></li>
+					
+                                                <li><a href="<%=BaseUrl%>/History"><i class="icon-material-outline-history"></i> &nbsp;&nbsp;&nbsp;History</a></li>
+					</ul>
+				</nav>
+				<div class="clearfix"></div>
+				<!-- Main Navigation / End -->
+				
+			</div>
+			<!-- Left Side Content / End -->
+
+
+			<!-- Right Side Content / End -->
+			<div class="right-side">
+
+				<!-- Mobile Navigation Button -->
+				<span class="mmenu-trigger">
+					<button class="hamburger hamburger--collapse" type="button">
+						<span class="hamburger-box">
+							<span class="hamburger-inner"></span>
+						</span>
+					</button>
+				</span>
+
+			</div>
+			<!-- Right Side Content / End -->
+
+		</div>
+	</div>
+	<!-- Header / End -->
+
+</header>

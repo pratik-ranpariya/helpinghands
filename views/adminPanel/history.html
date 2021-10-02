@@ -1,0 +1,172 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+<title>HalpingHands</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/style.css">
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/colors/blue.css">
+<link rel="stylesheet" href="<%=BaseUrl%>/adminpanel/css/sweetalert.min.css">
+<style type="text/css">
+table td{
+	display: table-cell !important;
+	width: 10% !important;
+	border-bottom: none !important;
+	background-color: #eee !important;
+}
+table th{
+	display: table-cell !important;
+	width: 10% !important;
+}
+table{
+	padding: 9px !important;
+}
+.near_by_hotel_wrapper{
+	background:#f5f5f5;
+	}
+.custom_table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: -3px !important;
+}
+.custom_table thead tr th {
+	padding: 0px 8px;
+	font-size: 16px;
+	border: 0 none !important;
+	border-top: 0 none !important;
+}
+.custom_table tbody tr {
+    -moz-box-shadow: 0 2px 3px #e0e0e0;
+    -webkit-box-shadow: 0 2px 3px #e0e0e0;
+    box-shadow: 0 2px 3px #e0e0e0;
+}
+.near_by_hotel_wrapper table tr td {
+	border-right: 1px solid #d2d1d1;
+}
+
+.custom_table tbody tr td {
+	background: #fff none repeat scroll 0 0;
+	border-top: 0 none !important;
+	margin-bottom: 20px;
+	padding: 10px 8px;
+	font-size: 16px;
+}
+.near_by_hotel_wrapper table tr td {
+    border-right: 1px solid #d2d1d1;
+}	
+
+.newbutton{
+	background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 2px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+.dropdown-menu .dropdown-menu{
+	max-height: 150px !important;
+}
+
+.responsive{
+	overflow-x:auto !important;
+}
+tr td,tr th{
+	min-width: 100px !important;
+	text-align: left !important;
+}
+</style>
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header Container
+================================================== -->
+<%- include('header.html');%>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+
+	<%- include('dashboard-leftlayout.html'); %>
+
+	<div class="dashboard-content-container">
+		<div class="dashboard-content-inner" >
+
+            <div class="fun-facts-container">
+                <div class="fun-fact" style="background-color: #2175eb; padding: 50px;">
+                        <a href="/phhistory/1">
+                            <div class="fun-fact-text">
+                                <h1 style="color: white; text-align: center">PH History</h1>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    
+                    <div class="fun-fact" style="background-color: #3caf17; padding: 50px;">
+                        <a href="/rhhistory/1">
+                            <div class="fun-fact-text">
+                                <h1 style="color: white; text-align: center">RH History</h1>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    
+                    <div class="fun-fact" style="background-color: #eb9121; padding: 50px;">
+                        <a href="/addpinhistory/1">
+                            <div class="fun-fact-text">
+                                <h1 style="color: white; text-align: center">Add Pin History</h1>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    
+                    <div class="fun-fact" style="background-color: #8a00e0;padding: 50px;">
+                        <a href="/cAmountHistory/1">
+                            <div class="fun-fact-text">
+                                <h1 style="color: white; text-align: center">Conform Amount History</h1>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    
+                    <div class="fun-fact" style="background-color: #262626; padding: 50px;">
+                        <a href="/purchasePinHistory/1">
+                            <div class="fun-fact-text">
+                                <h1 style="color: white; text-align: center">Purchase Pin History</h1>
+                            </div>
+                        </a>
+                    </div>
+            </div>
+        
+        </div>
+            
+
+		</div>
+	</div>
+
+</div>
+
+<script src="<%=BaseUrl%>/adminPanel/js/jquery-3.3.1.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/mmenu.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/tippy.all.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/simplebar.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-slider.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-select.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/snackbar.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/clipboard.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/counterup.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/magnific-popup.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/slick.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/custom.js"></script>
+<script src="<%=BaseUrl%>/adminpanel/js/sweetalert.min.js"></script>
+
+</body>
+</html>

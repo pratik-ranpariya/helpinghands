@@ -1,0 +1,449 @@
+
+<html lang="en">
+
+<!-- Mirrored from www.vasterad.com/themes/hireo/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Sep 2018 07:30:29 GMT -->
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>MantraDiamond</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/style.css">
+	<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/colors/blue.css">
+	<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/sweetalert.min.css">
+<style type="text/css">
+table td{
+	display: table-cell !important;
+	width: 10% !important;
+	border-bottom: none !important;
+	background-color: #eee !important;
+}
+table th{
+	display: table-cell !important;
+	width: 10% !important;
+}
+table{
+	padding: 9px !important;
+}
+.near_by_hotel_wrapper{
+	background:#f5f5f5;
+	}
+.custom_table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: -3px !important;
+}
+.custom_table thead tr th {
+	padding: 0px 8px;
+	font-size: 16px;
+	border: 0 none !important;
+	border-top: 0 none !important;
+}
+.custom_table tbody tr {
+    -moz-box-shadow: 0 2px 3px #e0e0e0;
+    -webkit-box-shadow: 0 2px 3px #e0e0e0;
+    box-shadow: 0 2px 3px #e0e0e0;
+}
+.near_by_hotel_wrapper table tr td {
+	border-right: 1px solid #d2d1d1;
+}
+
+.custom_table tbody tr td {
+	background: #fff none repeat scroll 0 0;
+	border-top: 0 none !important;
+	margin-bottom: 20px;
+	padding: 10px 8px;
+	font-size: 16px;
+}
+.near_by_hotel_wrapper table tr td {
+    border-right: 1px solid #d2d1d1;
+}	
+
+.newbutton{
+	background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 2px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+.dropdown-menu .dropdown-menu{
+	max-height: 150px !important;
+}
+
+.responsive{
+	overflow-x:auto !important;
+}
+tr td,tr th{
+	min-width: 100px !important;
+	text-align: left !important;
+}
+</style>
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header Container
+================================================== -->
+<%- include('header.html');%>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+<!-- Mobile Navigation Button -->
+				
+
+
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+
+	<%- include('dashboard-leftlayout.html');%>
+	<!-- Dashboard Content
+	================================================== -->
+	<div class="dashboard-content-container" data-simplebar>
+		<div class="dashboard-content-inner" >
+
+	        <form action="/addbudget" method="post">
+	        	<div class="col-4">
+	            <div class="keyword-input-container">
+					<input type="text" name="name" value="" class="with-border" placeholder="e.g. Add Budget" required>
+					<button class="keyword-input-button ripple-effect">
+						<i class="icon-material-outline-add" ></i>
+					</button>
+				</div>
+				</div>
+			</form>
+
+			<div class="row" style="margin-bottom: 25px">
+				<% if(data2){ %>
+                <% for(var i = 0; i < data2.length; i++ ) { %>
+				<div class="col-xl-4">
+					<div class="dashboard-box child-box-in-row"> 
+						<div class="headline">
+							<h3><i class="icon-material-outline-note-add"></i> <%= data2[i].name %></h3>
+						</div>
+					        <div class="col-xl-12">
+								<div class="submit-field">
+									<div class="keywords-container" style="margin-top: 15px">
+										<form action="/insertpcategory" method="post">
+										<div class="keyword-input-container">
+											<input type="text" name="pcategory" value="<%= data2[i].name %>" hidden>
+											<input type="text" name="name" value="" class="with-border" placeholder="e.g. Add Product" required>
+											<button class="keyword-input-button ripple-effect">
+												<i class="icon-material-outline-add" ></i>
+											</button>
+										</div>
+										</form>
+										<% for(var j = 0; j < (data2[i].item).length; j++){ %>
+										<span class="keyword">
+											<span class="keyword-remove" onclick="archiveFunctionss('<%=BaseUrl%>/deletepccategory/<%= data2[i].item[j]._id %>')" id="<%=BaseUrl%>/deletepccategory/<%= data2[i].item[j]._id %>"></span>
+											<span class="keyword-text"><%= data2[i].item[j].name %></span>
+										</span>
+										<% } %>
+										<div class="keywords-list"></div>
+										<div class="clearfix"></div>
+									</div>
+
+								</div>
+							</div>
+					</div>
+				</div>
+				<% }} %>
+
+			</div>
+			
+			<!-- Dashboard Headline -->
+			<div class="dashboard-headline">
+				<h3>Categories & Sub-Categories</h3>
+			</div>
+			<!-- Row -->
+			<div class="row">
+
+				<div class="col-xl-12 col-md-12 responsive">
+					<div class="">
+						<a href="#small-dialog" class="popup-with-zoom-anim button"><i class="icon-feather-plus-square"></i> Add Category</a> &nbsp;&nbsp;
+						<a href="#small-dialog-2" class="popup-with-zoom-anim button"><i class="icon-feather-plus-square"></i> Add Subcategory</a>
+					</div>
+					<br>
+					<table class="table no-border custom_table dataTable no-footer dtr-inline" style="width: 100%;background-color:#fff;">
+					    <thead>
+					      <tr>
+					        <th class="text-center" width="5px">S.NO</th>
+					        <th class="text-center" width="10px">Category</th>
+					        <th class="text-center" width="30px">Subcategories</th>
+					      </tr>
+					    </thead>
+					    <tbody style="background-color: #eee;" id="category">
+								<% if(data1){ var con = '1';%>
+                                <% for(var i = 0; i < data1.length; i++ ) { %>
+									<tr><form id="jjj"><input type="hidden" name="id" value="<%= data1[i]._id %>"><input type="hidden" name="name" value="<%= data1[i].name %>"></form>
+										<td><button class="newbutton"><%= con++; %> </button></td>
+										<td><button class="newbutton"><%= data1[i].name %> <a href="<%=BaseUrl%>/editcategory/<%= data1[i]._id %>"><i class="icon-line-awesome-eyedropper" style="color:#46c446;width: 60px !important;width: 70px;"></i> <i class="icon-feather-x-circle" onclick="archiveFunction('<%=BaseUrl%>/deletecategory/<%= data1[i]._id %>')" id="<%=BaseUrl%>/deletecategory/<%= data1[i]._id %>" style="color:red;width: 60px !important;width: 70px;"></i></button></td>
+										<td>
+										    <% for(var j = 0; j < (data1[i].item).length; j++){ %>
+											   <button class="newbutton"> <%= data1[i].item[j].name %> <i class="icon-line-awesome-eyedropper" style="color:#46c446;width: 60px !important;width: 70px;"></i> <i class="icon-feather-x-circle" onclick="archiveFunctions('<%=BaseUrl%>/deletesubcategory/<%= data1[i].item[j]._id %>')" id="<%=BaseUrl%>/deletesubcategory/<%= data1[i].item[j]._id %>" style="color:red;width: 60px !important;width: 70px;"></i></button>
+										    <% } %>
+										</td>
+									</tr>			
+								<% }} %>		      
+					    </tbody>
+					  </table>
+				</div>	
+
+			</div>
+			<%- include('footer.html');%>
+	</div>
+
+	<!-- Dashboard Content / End -->
+
+</div>
+<!-- Dashboard Container / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+
+<!-- Apply for a job popup
+================================================== -->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+	<!--Tabs -->
+	<div class="sign-in-form">
+		<ul class="popup-tabs-nav">
+			<li><a href="#tab">Add Category</a></li>
+		</ul>
+		<div class="popup-tabs-container">
+			<!-- Tab -->
+			<div class="popup-tab-content" id="tab">		
+				<!-- Form -->
+				<form action="<%=BaseUrl%>/insertcategory"  method="post" id="add-category" enctype="multipart/form-data">
+
+					<input type="text" name="name" cols="10" placeholder="Enter Category" class="with-border">
+
+					<div class="col-xl-12">
+						<div class="submit-field">
+							<div class="uploadButton margin-top-30">
+								<input class="uploadButton-input" type="file" accept="image/*" name="uploaded_image" id="upload"required/>
+								<label class="uploadButton-button ripple-effect" for="upload">Upload File</label>
+								<span class="uploadButton-file-name">Image or document that might be helpful in describing your job</span>
+							</div>
+						</div>
+					</div>
+				
+				<!-- Button -->
+				<button class="button full-width button-sliding-icon ripple-effect" type="submit" form="add-category">Add Category <i class="icon-material-outline-arrow-right-alt"></i></button>
+				</form>	
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Apply for a job popup / End -->
+<div id="small-dialog-2" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+	<div class="sign-in-form">
+		<ul class="popup-tabs-nav">
+			<li><a href="#tab">Add Subcategory</a></li>
+		</ul>
+		<div class="popup-tabs-container">
+			<div class="popup-tab-content" id="tab2">	
+				<form action="<%=BaseUrl%>/insertsubcategory" method="post" id="add-subcategory" enctype="multipart/form-data">
+					
+
+					<select class="selectpicker with-border" title="Select Category" name="category" onChange="getState(this.value);">
+						<option class="bs-title-option" value="">Select Category</option>
+						<% for(i = 0; i < data1.length; i++){ %> 
+						<option value="<%= data1[i].name %>"><%= data1[i].name %></option>
+						<% } %>
+					</select>
+					<br>
+					<input class="with-border" type="text" name="name" value="" placeholder="add SubCategory">
+					<!-- <select class=" with-border" id="state-list" title="Select subCategory" name="subcategory">
+						<option value="">Select SubCategory</option>
+					</select> -->
+					<!-- <div class="uploadButton margin-top-30">
+						<input class="uploadButton-input" type="file" accept="image/*" name="file" id="upload"required/>
+						<label class="uploadButton-button ripple-effect" for="upload">Upload File</label>
+						<span class="uploadButton-file-name" style="font-size:18px;">Upload Subcategory Image</span>
+					</div> -->
+				
+				<button class="button full-width button-sliding-icon ripple-effect" type="submit" form="add-subcategory">Add Subcategory <i class="icon-material-outline-arrow-right-alt"></i></button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Scripts
+================================================== -->
+<script src="<%=BaseUrl%>/adminPanel/js/jquery-3.3.1.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/mmenu.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/tippy.all.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/simplebar.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-slider.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-select.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/snackbar.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/clipboard.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/counterup.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/magnific-popup.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/slick.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/custom.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/sweetalert.min.js"></script>
+
+
+</body>
+
+<!-- Mirrored from www.vasterad.com/themes/hireo/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Sep 2018 07:30:29 GMT -->
+</html>
+
+
+
+
+	<!-- Dashboard Content / End -->
+
+<?php include("views/footer.php");?>
+
+</div>
+<script> 
+	function getState(val) { 
+		console.log(val);
+	$.ajax({
+		type: "GET",
+		url: "<%=BaseUrl%>/getsubcategory/"+val,
+		success: function(data){
+			// console.log(data);
+		     // $("#state-list").html(data);
+
+		    console.log("results ::::::: ", data);
+
+				var output = ['<option value"">Select Category</option>'];
+				for (var i = 0; i < data.length; i++) {
+
+					output.push('<option value="'+ data[i]['_id'] +'">'+ data[i]['name'] +'</option>');
+				}
+				
+				$('#state-list').html(output.join(''));
+		}
+		});
+    } 
+</script>
+
+
+<!-- <script> 
+	function getState2(val) {
+
+		 var x = document.getElementById("jjj");
+			var type = ["hidden", "text"];
+            var output = [''];
+            for (var i = 0; i < x.length; i++) {
+            	for(var j = 0; j < type.length; j++){
+				    output.push('<input type="'+ type[j] +'" name="name" class="with-border" value="'+ x.elements[i].value +'">');
+				}
+			}
+		
+		$('#state-listss').html(output.join(''));
+    } 
+</script> -->
+
+<script type="text/javascript">
+
+	function archiveFunction(id) {
+event.preventDefault(); // prevent form submit
+var form = event.target.form; // storing the form
+swal({
+	title: "Are you sure?",
+	text: "are you sure you want to Delete this Category.",
+	type: "warning",
+	showCancelButton: true,
+	confirmButtonColor: "#DD6B55",
+	confirmButtonText: "Yes continue !",
+	cancelButtonText: "No, cancel please!",
+	closeOnConfirm: false,
+	closeOnCancel: false
+},
+function(isConfirm){
+	if (isConfirm) {
+		swal("Good job!", "Blocked User!", "success");
+		$.ajax({
+			url: ''+id,
+			type: 'POST',
+			success: function(results){
+				console.log("results::",results);
+			location.reload(); // then reload the page.(3)
+		}
+	});	
+	} else {
+		swal("Cancelled", "Request Cancelled!", "error");
+	}
+});
+}
+
+	function archiveFunctionss(id) {
+		event.preventDefault(); // prevent form submit
+		var form = event.target.form; // storing the form
+		swal({
+			title: "Are you sure?",
+			text: "are you sure you want to Delete this Category.",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "Yes continue !",
+			cancelButtonText: "No, cancel please!",
+			closeOnConfirm: false,
+			closeOnCancel: false
+		},
+		function(isConfirm){
+			if (isConfirm) {
+				swal("Good job!", "Blocked User!", "success");
+				$.ajax({
+					url: ''+id,
+					type: 'POST',
+					success: function(results){
+						console.log("results::",results);
+					location.reload(); // then reload the page.(3)
+				}
+			});	
+			} else {
+				swal("Cancelled", "Request Cancelled!", "error");
+			}
+		});
+		}
+
+	function archiveFunctions(id) {
+event.preventDefault(); // prevent form submit
+var form = event.target.form; // storing the form
+swal({
+	title: "Are you sure?",
+	text: "are you sure you want to Delete this SubCategory.",
+	type: "warning",
+	showCancelButton: true,
+	confirmButtonColor: "#DD6B55",
+	confirmButtonText: "Yes continue !",
+	cancelButtonText: "No, cancel please!",
+	closeOnConfirm: false,
+	closeOnCancel: false
+},
+function(isConfirm){
+	if (isConfirm) {
+		swal("Good job!", "Blocked User!", "success");
+		$.ajax({
+			url: ''+id,
+			type: 'POST',
+			success: function(results){
+				console.log("results::",results);
+			location.reload(); // then reload the page.(3)
+		}
+	});	
+	} else {
+		swal("Cancelled", "Request Cancelled!", "error");
+	}
+});
+}
+
+</script>
+
+</body>
+</html>

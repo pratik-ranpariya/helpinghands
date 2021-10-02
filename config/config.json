@@ -1,0 +1,12 @@
+{
+	"verson": "v1",
+	"serverport": 3000,
+	"adminport": 3002,
+        "mongodb": {
+		"host": "13.235.148.218",
+		"port": 53584,
+		"username": "halpingHands",
+		"password": "HalpingIsGood",
+		"dbname": "helpinghands"
+	}
+}

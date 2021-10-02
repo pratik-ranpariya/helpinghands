@@ -1,0 +1,281 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+<title>HalpingHands</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/style.css">
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/colors/blue.css">
+<link rel="stylesheet" href="<%=BaseUrl%>/adminpanel/css/sweetalert.min.css">
+<style type="text/css">
+table td{
+	display: table-cell !important;
+	width: 10% !important;
+	border-bottom: none !important;
+	background-color: #eee !important;
+}
+table th{
+	display: table-cell !important;
+	width: 10% !important;
+}
+table{
+	padding: 9px !important;
+}
+.near_by_hotel_wrapper{
+	background:#f5f5f5;
+	}
+.custom_table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: -3px !important;
+}
+.custom_table thead tr th {
+	padding: 0px 8px;
+	font-size: 16px;
+	border: 0 none !important;
+	border-top: 0 none !important;
+}
+.custom_table tbody tr {
+    -moz-box-shadow: 0 2px 3px #e0e0e0;
+    -webkit-box-shadow: 0 2px 3px #e0e0e0;
+    box-shadow: 0 2px 3px #e0e0e0;
+}
+.near_by_hotel_wrapper table tr td {
+	border-right: 1px solid #d2d1d1;
+}
+
+.custom_table tbody tr td {
+	background: #fff none repeat scroll 0 0;
+	border-top: 0 none !important;
+	margin-bottom: 20px;
+	padding: 10px 8px;
+	font-size: 16px;
+}
+.near_by_hotel_wrapper table tr td {
+    border-right: 1px solid #d2d1d1;
+}	
+
+.newbutton{
+	background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 2px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+.dropdown-menu .dropdown-menu{
+	max-height: 150px !important;
+}
+
+.responsive{
+	overflow-x:auto !important;
+}
+tr td,tr th{
+	min-width: 100px !important;
+	text-align: left !important;
+}
+</style>
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header Container
+================================================== -->
+<%- include('header.html');%>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+
+	<%- include('dashboard-leftlayout.html'); %>
+
+	<div class="dashboard-content-container">
+		<div class="dashboard-content-inner" >
+
+		<div class="fun-facts-container">
+				<div class="fun-fact" data-fun-fact-color="#36bd78">
+					<div class="fun-fact-text">
+						<span>Today Total Pin</span>
+						<h4><%= data.total_pin %></h4>
+					</div>
+					<div class="fun-fact-icon"><i class="icon-material-outline-business-center"></i></div>
+				</div>
+				<div class="fun-fact" data-fun-fact-color="#b81b7f">
+					<div class="fun-fact-text">
+						<span>Sold Pin</span>
+						<h4><%= data.sold_pin %></h4>
+					</div>
+					<div class="fun-fact-icon"><i class="icon-material-outline-gavel"></i></div>
+				</div>
+				<div class="fun-fact" data-fun-fact-color="#efa80f">
+					<div class="fun-fact-text">
+						<span>Available Pin</span>
+						<h4><%= data.available_pin %></h4>
+					</div>
+					<div class="fun-fact-icon"><i class="icon-material-outline-rate-review"></i></div>
+				</div>
+				
+				<div class="fun-fact" data-fun-fact-color="#2a41e6">
+					<div class="fun-fact-text">
+						<span>Pin Price</span>
+						<h4><%= data.pin_amount %></h4>
+					</div>
+					<div class="fun-fact-icon"><i class="icon-feather-trending-up"></i></div>
+				</div>
+			</div>
+                        <div id="demo" style="margin-top:10px"></div>
+			<div id="demo2"style="margin-top:10px"></div>
+			<form action="/resetpin" method="get">
+				<button class="button button-sliding-icon ripple-effect" type="submit" style="margin-top: 10px">
+				    Clear Pin
+			    </button>
+			</form>
+
+		</div>
+	</div>
+
+
+	
+	
+
+</div>
+
+
+
+
+
+<!-- Scripts
+================================================== -->
+<script src="<%=BaseUrl%>/adminPanel/js/jquery-3.3.1.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/mmenu.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/tippy.all.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/simplebar.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-slider.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-select.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/snackbar.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/clipboard.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/counterup.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/magnific-popup.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/slick.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/custom.js"></script>
+<script src="<%=BaseUrl%>/adminpanel/js/sweetalert.min.js"></script>
+
+
+<script>
+	// Set the date we're counting down to
+/*	var pinlive = `<% if(!data){%> 0 <%}else{%> <%= data.starttime %> <%}%>`
+	console.log(pinlive, 'a')
+	var countDownDate = new Date(pinlive).getTime();
+	
+	// Update the count down every 1 second
+	var xx = setInterval(function() {
+	
+	  // Get today's date and time
+	  var now = new Date().getTime();
+		
+	  // Find the distance between now and the count down date
+	  var distance = countDownDate - now;
+		
+	  // Time calculations for days, hours, minutes and seconds
+	  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+	  var availableorlive = `<% if(data.visible == 2){%> Pin Back In: <%}else if(data.visible == 0){%> Pin Expired In:  <%}%>`
+	  var pinlivesss = availableorlive + days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
+		
+	  // Output the result in an element with id="demo"
+	  document.getElementById("demo").innerHTML = pinlivesss;
+		
+	  // If the count down is over, write some text 
+	  if (distance < 0) {
+		clearInterval(xx);
+		document.getElementById("demo").innerHTML = "";
+	  }
+	}, 1000);*/
+        var pinlive = `<% if(data.visible == 0){%> <%= data.endtime %> <%}else{%> <%= data.starttime %> <%}%>`;
+//	console.log(new Date(pinlive), 'a')
+	var currentTime = new Date(pinlive)
+		currentTime.setHours(currentTime.getHours() - 5);
+		currentTime.setMinutes(currentTime.getMinutes() - 30);
+//		console.log(currentTime, 'aa')
+
+	var countDownDate = new Date(currentTime).getTime()
+//	console.log(currentTime.getTime(), 'hh')
+	
+	var xx = setInterval(function() {
+	
+	  var now = new Date().getTime()
+		
+	  var distance = countDownDate - now;
+		
+	  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+	  var availableorlive = `<% if(data.visible == 2){%> Pin Back In: <%}else if(data.visible == 0){%> Pin Expired In:  <%}%>`
+	  var pinlivesss = availableorlive + days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
+		
+	  document.getElementById("demo").innerHTML = pinlivesss;
+		
+	  if (distance < 0) {
+		clearInterval(xx);
+		document.getElementById("demo").innerHTML = "";
+                window.onload = function() {
+    if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+    }
+}
+             }
+	}, 1000);
+	</script>
+
+<script type="text/javascript">
+
+	function archiveFunction(id) {
+event.preventDefault(); // prevent form submit
+var form = event.target.form; // storing the form
+swal({
+	title: "Are you sure?",
+	text: "are you sure you want to Delete this Product.",
+	type: "warning",
+	showCancelButton: true,
+	confirmButtonColor: "#DD6B55",
+	confirmButtonText: "Yes continue !",
+	cancelButtonText: "No, cancel please!",
+	closeOnConfirm: false,
+	closeOnCancel: false
+},
+function(isConfirm){
+	if (isConfirm) {
+		swal("Good job!", "Blocked User!", "success");
+		$.ajax({
+			url: ''+id,
+			type: 'POST',
+			success: function(results){
+				console.log("results::",results);
+			location.reload(); // then reload the page.(3)
+		}
+	});	
+	} else {
+		swal("Cancelled", "Request Cancelled!", "error");
+	}
+});
+}
+
+</script>
+
+
+</body>
+</html>

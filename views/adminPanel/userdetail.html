@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<title>HalpingHands</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/style.css">
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/colors/blue.css">
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/sweetalert.min.css">
+<style type="text/css">
+table td{
+	display: table-cell !important;
+	width: 10% !important;
+	border-bottom: none !important;
+	background-color: #eee !important;
+}
+table th{
+	display: table-cell !important;
+	width: 10% !important;
+}
+table{
+	padding: 9px !important;
+}
+.near_by_hotel_wrapper{
+	background:#f5f5f5;
+	}
+.custom_table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: -3px !important;
+}
+.custom_table thead tr th {
+	padding: 0px 8px;
+	font-size: 16px;
+	border: 0 none !important;
+	border-top: 0 none !important;
+}
+.custom_table tbody tr {
+    -moz-box-shadow: 0 2px 3px #e0e0e0;
+    -webkit-box-shadow: 0 2px 3px #e0e0e0;
+    box-shadow: 0 2px 3px #e0e0e0;
+}
+.near_by_hotel_wrapper table tr td {
+	border-right: 1px solid #d2d1d1;
+}
+
+.custom_table tbody tr td {
+	background: #fff none repeat scroll 0 0;
+	border-top: 0 none !important;
+	margin-bottom: 20px;
+	padding: 10px 8px;
+	font-size: 16px;
+}
+.near_by_hotel_wrapper table tr td {
+    border-right: 1px solid #d2d1d1;
+}	
+</style>
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header Container
+================================================== -->
+<!-- <?php include('header.php');?> -->
+<%- include ('header.html'); %>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+
+	<%- include ('dashboard-leftlayout.html'); %>
+	<!-- <?php include('dashboard-leftlayout.php');?> -->
+	<!-- Dashboard Content
+	================================================== -->
+	<div class="dashboard-content-container" data-simplebar>
+		<div class="dashboard-content-inner" >
+			
+			<!-- Dashboard Headline -->
+			<div class="dashboard-headline">
+				<h3>User Detail</h3>
+			</div>
+            
+            <!--Freelancer -->
+            <div class="freelancers-container freelancers-list-layout margin-top-35">
+				<div class="freelancer">
+
+					<!-- Overview -->
+					<div class="freelancer-overview">
+						<div class="freelancer-overview-inner">
+							<!-- Bookmark Icon -->
+							<span class="bookmark-icon"></span>
+                            
+                            <div class="freelancer-avatar">
+								<img src="<%=BaseUrl%>/adminPanel/dist/user-avatar-placeholder.png" >
+							</div>
+
+							<!-- Name -->
+							<div class="freelancer-name">
+								<h4><a href="#">Name: <%= userdetail.name %></a></h4>
+                                                                <span>Mobile: <%= userdetail.Mobile_no %></span><br>
+                                                                <span>Available Balance: <%= userdetail.walletBalance %> Rs</span>
+								<!-- Rating -->
+								<!-- <span class="company-not-rated margin-bottom-5">Minimum of 3 votes required</span> -->
+							</div>
+						</div>
+					</div>
+					
+					<!-- Details -->
+					<div class="freelancer-details">
+						<div class="freelancer-details-list">
+							<ul>
+								<li>City <strong><i class="icon-material-outline-location-on"></i> <%= userdetail.city %></strong></li>
+								<li>Total RH <strong><%= rhcount %></strong></li>
+								<li>Total PH <strong><%= phcount %></strong></li>
+                            </ul>
+                            <ul>
+                                <li>Block user<strong><label class="switch"><input type="checkbox" onclick="archiveFunctionss('<%=BaseUrl%>/block/<%= userdetail._id %>')" id="<%=BaseUrl%>/block/<%= userdetail._id %>" <% if(userdetail.block == 1){ %> checked <% } %>><span class="switch-button"></span></label></strong></li>
+	<li>My ReferCode <strong><%= userdetail.my_referid %></strong></li>
+                                <li>ReferBy <strong><% if(userdetail.sender_referid != ''){%> <%= userdetail.sender_referid %> <%}else{ %> N/A <% } %></strong></li>
+                            
+						</ul>
+                        </div>
+                    </div>
+                    
+
+                </div>
+            </div>
+
+
+            <div class="dashboard-headline">
+				<h3>Pin Purchase history</h3>
+            </div>
+            
+            <div class="row">
+                <div class="col-xl-12 col-md-12 responsive">
+                    <table class="table no-border custom_table dataTable no-footer dtr-inline" style="width: 100%;background-color:#fff;">
+                        <thead>
+                          <tr>
+                            <th class="text-center">S.No</th>
+                            <th class="text-center">Amount</th>
+                            <th class="text-center">Purchase Pin</th>
+                            <th class="text-center">transection ID</th>
+                            <th class="text-center">Date</th>
+                          </tr>
+                        </thead>
+                        <tbody style="background-color: #eee;" id="services">
+                            <% if (pinhistory.length > 0) { var con = '1'; %>
+                                    <% for(var i = 0; i < pinhistory.length; i++ ) { %>
+                                    <tr>
+                                        <td><%= con %></td>
+                                        <td><%= pinhistory[i].amount %></td>
+                                        <td><%= pinhistory[i].pin_count %></td>
+                                        <td><%= pinhistory[i].Tr_id %></td>
+                                        <td><%= pinhistory[i].date%></td>
+                                        
+                                    </tr>
+                            <% con++; } }
+                              else
+                              {
+                                %>
+                                <tr>
+                                    <td colspan="10"><center>No Record Found!</center></td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                      </table>
+                </div>	
+    
+            </div>
+
+
+            <!-- wallete Transfer -->
+
+            <div class="dashboard-headline" style="margin-top: 50px;">
+				<h3>Wallet Transfer history</h3>
+            </div>
+            
+            <div class="row">
+                <div class="col-xl-12 col-md-12 responsive">
+                    <table class="table no-border custom_table dataTable no-footer dtr-inline" style="width: 100%;background-color:#fff;">
+                        <thead>
+                          <tr>
+                            <th class="text-center">S.No</th>
+                            <th class="text-center">Amount</th>
+                            <th class="text-center">Receiver ID</th>
+                            <th class="text-center">transection ID</th>
+                            <th class="text-center">Date</th>
+                          </tr>
+                        </thead>
+                        <tbody style="background-color: #eee;" id="services">
+                            <% if (walletTransfer.length > 0) { var con = '1'; %>
+                                    <% for(var i = 0; i < walletTransfer.length; i++ ) { %>
+                                    <tr>
+                                        <td><%= con %></td>
+                                        <td><%= walletTransfer[i].amount %></td>
+                                        <td><a href="<%=BaseUrl%>/userdata/<%= walletTransfer[i].receiver_id %>"><%= walletTransfer[i].receiver_id %></a></td>
+                                        <td><%= walletTransfer[i].Tr_id %></td>
+                                        <td><%= walletTransfer[i].date%></td>
+                                        
+                                    </tr>
+                            <% con++; } }
+                              else
+                              {
+                                %>
+                                <tr>
+                                    <td colspan="10"><center>No Record Found!</center></td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                      </table>
+                </div>	
+    
+            </div>
+
+
+
+
+
+
+
+          <div class="dashboard-headline" style="margin-top: 50px;">
+				<h3>Receive Amount history</h3>
+            </div>
+            
+            <div class="row">
+                <div class="col-xl-12 col-md-12 responsive">
+                    <table class="table no-border custom_table dataTable no-footer dtr-inline" style="width: 100%;background-color:#fff;">
+                        <thead>
+                          <tr>
+                            <th class="text-center">S.No</th>
+                            <th class="text-center">Amount</th>
+                            <th class="text-center">Sender ID</th>
+                            <th class="text-center">transection ID</th>
+                            <th class="text-center">Date</th>
+                          </tr>
+                        </thead>
+                        <tbody style="background-color: #eee;" id="services">
+                            <% if (receive_amt.length > 0) { var con = '1'; %>
+                                    <% for(var i = 0; i < receive_amt.length; i++ ) { %>
+                                    <tr>
+                                        <td><%= con %></td>
+                                        <td><%= receive_amt[i].amount %></td>
+                                        <td><a href="<%=BaseUrl%>/userdata/<%= receive_amt[i].sender_id %>"><%= receive_amt[i].sender_id %></a></td>
+                                        <td><%= receive_amt[i].Tr_id %></td>
+                                        <td><%= receive_amt[i].date%></td>
+                                        
+                                    </tr>
+                            <% con++; } }
+                              else
+                              {
+                                %>
+                                <tr>
+                                    <td colspan="10"><center>No Record Found!</center></td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                      </table>
+                </div>	
+    
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<!-- Pagination / End -->
+			<%- include('footer.html'); %>
+			
+		</div>
+	</div>
+	<!-- Dashboard Content / End -->
+
+</div>
+<!-- Dashboard Container / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+
+
+
+<!-- Scripts
+================================================== -->
+<script src="<%=BaseUrl%>/adminPanel/js/jquery-3.3.1.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/mmenu.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/tippy.all.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/simplebar.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-slider.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-select.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/snackbar.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/clipboard.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/counterup.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/magnific-popup.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/slick.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/custom.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/sweetalert.min.js"></script>
+<!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
+
+<script type="text/javascript">
+
+	function archiveFunctionss(id) {
+        console.log(id)
+
+		$.ajax({
+			url: ''+id,
+			type: 'GET',
+			success: function(results){
+				console.log("results::",results);
+			location.reload(); // then reload the page.(3)
+		}
+	})
+}
+
+</script>
+
+<script type="text/javascript">
+
+$(function() {
+  $('#toggleWidth').on('click', function(e) {
+    $('.multiLineLabel').toggleClass('maxWidth');
+  });
+})
+</script>
+
+</body>
+</html>
